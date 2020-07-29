@@ -13,6 +13,11 @@
 
     Function Contact() As ActionResult
         ViewData("Message") = "Your contact page."
+        Dim test As Integer = 1
+        test = 2
+        If test = 2 Then
+            ViewData("Message") = "test"
+        End If
 
         Return View()
     End Function
