@@ -16,6 +16,13 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'thomas-hayden'
+    scannerMode: 'MSBuild'
+    projectKey: 'thomas-hayden_test'
+    projectName: 'test'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
@@ -25,3 +32,8 @@ steps:
     command: 'test'
     arguments: '--collect "Code Coverage"'
     projects: '**/*.csproj'
+
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
