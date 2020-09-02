@@ -16,7 +16,36 @@ namespace WebApplication2.Controllers
 
         public static string Test()
         {
-            return "test";
+            var blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            blah = "test";
+            return blah;
         }
 
         public IActionResult Index()
