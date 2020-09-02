@@ -34,3 +34,4 @@ steps:
     projects: '**/*.csproj'
 
 - task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
