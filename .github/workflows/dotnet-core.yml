@@ -21,13 +21,13 @@ jobs:
       run: |
             dotnet tool install --global dotnet-sonarscanner --version 4.9.0
             dotnet tool install --global coverlet.console
-            dotnet sonarscanner begin /k:"thomas-hayden_test" /o:"thomas-hayden" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:"`pwd`/SonarQube.Analysis.xml"
+            dotnet sonarscanner begin /k:"thomas-hayden_test" /o:"thomas-hayden" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
     - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      run: dotnet test --collect:"XPlat Code Coverage" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: End SonarScanner
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
       env:
