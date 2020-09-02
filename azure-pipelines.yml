@@ -20,7 +20,7 @@ steps:
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'thomas-hayden'
-    scannerMode: 'MSBuild'
+    scannerMode: 'CLI'
     projectKey: 'thomas-hayden_test'
     projectName: 'test'
 - task: DotNetCoreCLI@2
@@ -33,7 +33,6 @@ steps:
     arguments: '--collect "Code Coverage"'
     projects: '**/*.csproj'
 
-- task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
