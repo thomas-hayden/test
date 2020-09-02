@@ -39,7 +39,7 @@ jobs:
               echo "::set-env name=file_name::TestReport.${{github.run_number}}.trx"
             fi
     - name: Test
-      run: dotnet test --no-restore --verbosity normal --configuration $config --logger:"trx;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
+      run: dotnet test --no-restore --verbosity normal --configuration Release --logger:"trx;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
     # upload report as build artifact
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
