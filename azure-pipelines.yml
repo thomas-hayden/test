@@ -34,4 +34,6 @@ steps:
     projects: '**/*.csproj'
 
 - task: SonarCloudAnalyze@1
+  inputs:
+    projectKey: 'thomas-hayden_test'
 - task: SonarCloudPublish@1
