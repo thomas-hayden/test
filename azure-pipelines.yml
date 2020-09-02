@@ -20,7 +20,7 @@ steps:
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'thomas-hayden'
-    scannerMode: 'CLI'
+    scannerMode: 'MsBuild'
     projectKey: 'thomas-hayden_test'
     projectName: 'test'
 - task: DotNetCoreCLI@2
