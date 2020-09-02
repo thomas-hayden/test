@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    - name: Add Liquid Tests
+      run: dotnet add package LiquidTestReports.Markdown
     - name: Install dependencies
       run: dotnet restore
     - name: Build
@@ -33,13 +35,13 @@ jobs:
             if ${{ github.event_name == 'pull_request' }}
             then
               echo "::set-env name=title::Test Run for PR #${{steps.PRNUMBER.outputs.pr}} (${{github.run_number}})"
-              echo "::set-env name=file_name::TestReport.${{steps.PRNUMBER.outputs.pr}}.${{github.run_number}}.trx"
+              echo "::set-env name=file_name::TestReport.${{steps.PRNUMBER.outputs.pr}}.${{github.run_number}}.md"
             else
               echo "::set-env name=title::Test Run ${{github.run_number}}"
-              echo "::set-env name=file_name::TestReport.${{github.run_number}}.trx"
+              echo "::set-env name=file_name::TestReport.${{github.run_number}}.md"
             fi
     - name: Test
-      run: dotnet test --no-restore --verbosity normal --configuration Release --logger:"trx;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
+      run: dotnet test --no-restore --verbosity normal --configuration Release --logger:"liquid.md;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
     # upload report as build artifact
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
