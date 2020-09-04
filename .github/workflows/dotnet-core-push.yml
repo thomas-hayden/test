@@ -11,7 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+	  with:
+	    fetch-depth: 0
+    - name: 'Setup .NET Core ${{ github.REF }}'
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
