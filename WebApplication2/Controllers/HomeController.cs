@@ -19,6 +19,11 @@ namespace WebApplication2.Controllers
             return "test";
         }
 
+        public static string Test2()
+        {
+            return "test";
+        }
+
         public IActionResult Index()
         {
             return View();
