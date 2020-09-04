@@ -21,12 +21,15 @@ jobs:
       run: dotnet restore
     - name: Install sonarscanner
       run: |
-            dotnet tool install --global dotnet-sonarscanner --version 4.9.0
             dotnet tool install --global coverlet.console
-            dotnet sonarscanner begin /k:"thomas-hayden_test" /o:"thomas-hayden" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths="*/coverage.opencover.xml"
     - name: Test
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
-    - name: End SonarScanner
-      run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Analyze with SonarCloud
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir:  .
+        args: >
+          -Dsonar.organization=${{ github.organization }}
+          -Dsonar.projectKey=${{ github.repository }}
+          -Dsonar.cs.opencover.reportPaths=*/coverage.opencover.xml
+          -Dsonar.verbose=true
