@@ -48,6 +48,11 @@ namespace WebApplication2.Controllers
             return blah;
         }
 
+        public static string Test2()
+        {
+            return "test";
+        }
+
         public IActionResult Index()
         {
             return View();
