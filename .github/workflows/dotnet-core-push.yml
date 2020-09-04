@@ -13,7 +13,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: 'Setup .NET Core ${{ github.REF }:11} ${{GITHUB_REF}} ${GITHUB_REF:11}'
+    - name: Blah
+      run: echo running on branch ${GITHUB_REF}
+    - name: 'Setup .NET Core'
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
