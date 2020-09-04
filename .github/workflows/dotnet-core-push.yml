@@ -12,9 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
+        ref: ${{ github.REF }}
         fetch-depth: 0
-    - name: Blah
-      run: echo ${GITHUB_REF}
     - name: 'Setup .NET Core'
       uses: actions/setup-dotnet@v1
       with:
