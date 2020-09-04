@@ -21,7 +21,7 @@ jobs:
       run: |
             dotnet tool install --global dotnet-sonarscanner
             dotnet tool install --global coverlet.console
-            dotnet sonarscanner begin /k:"thomas-hayden_test" /o:"thomas-hayden" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths="*/coverage.opencover.xml" /d:sonar.scm.provider=git /d:sonar.branch.name="${GITHUB_REF:11}"
+            dotnet sonarscanner begin /k:"thomas-hayden_test" /o:"thomas-hayden" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths="*/coverage.opencover.xml" /d:sonar.scm.provider=git /d:sonar.branch.name=${GITHUB_REF:11}
     - name: Test
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
     - name: End SonarScanner
