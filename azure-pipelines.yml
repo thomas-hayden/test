@@ -16,14 +16,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-
-- task: puma-scan-pro-build-task@1
-  inputs:
-    projectPath: 'WebApplication2.sln'
-    scanResultsFormat: 'sonarcloud'
-    outputFilename: 'PumaScanResults'
-    verboseMode: true
-
 - task: DotNetCoreCLI@2
   displayName: 'Restore solution'
   inputs:
@@ -48,6 +40,13 @@ steps:
     command: 'test'
     arguments: '--collect "Code Coverage"'
     projects: '**/*.csproj'
+
+- task: puma-scan-pro-build-task@1
+  inputs:
+    projectPath: 'WebApplication2.sln'
+    scanResultsFormat: 'sonarcloud'
+    outputFilename: 'PumaScanResults'
+    verboseMode: true
 
 - task: SonarCloudAnalyze@1
 
