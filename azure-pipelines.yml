@@ -44,7 +44,7 @@ steps:
 - task: puma-scan-pro-build-task@1
   inputs:
     projectPath: 'WebApplication2.sln'
-    scanResultsFormat: 'sonarcloud'
+    scanResultsFormat: 'html'
     outputFilename: 'PumaScanResults'
     verboseMode: true
 
@@ -54,3 +54,14 @@ steps:
   displayName: 'Publish results on build summary'
   inputs:
     pollingTimeoutSec: '300'
+
+- script: |
+    $text = Get-Content .\PumaScanResults.html -Raw
+    Write-Host "$text"
+    Write-Host "##vso[task.setvariable variable=Test;]$text"
+
+- task: GitHubComment@0
+  inputs:
+    gitHubConnection: 'thomas-hayden'
+    repositoryName: '$(Build.Repository.Name)'
+    comment: '$(Test)'
