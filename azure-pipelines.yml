@@ -33,4 +33,4 @@ steps:
   inputs:
     gitHubConnection: 'thomas-hayden'
     repositoryName: '$(Build.Repository.Name)'
-    comment: '$(Test)'
+    comment: 'Test'
