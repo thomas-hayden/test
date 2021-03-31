@@ -25,7 +25,7 @@ steps:
     verboseMode: true
 
 - powershell: |
-    $text = Get-Content .\PumaScanResults.sonarcloud.json -Raw
+    $text = Get-Content .\PumaScanResults.vso -Raw
     Write-Host "$text"
     Write-Host "##vso[task.setvariable variable=Test;]$text"
 
@@ -33,4 +33,4 @@ steps:
   inputs:
     gitHubConnection: 'thomas-hayden'
     repositoryName: '$(Build.Repository.Name)'
-    comment: 'Test'
+    comment: '$(Test)'
