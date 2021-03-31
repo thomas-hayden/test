@@ -16,31 +16,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Restore solution'
-  inputs:
-    command: 'restore'
-    projects: '**/*.sln'
-    feedsToUse: 'select'
-
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'thomas-hayden'
-    scannerMode: 'MSBuild'
-    projectKey: 'thomas-hayden_test'
-    projectName: 'test'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.sln'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    arguments: '--collect "Code Coverage"'
-    projects: '**/*.csproj'
-
 - task: puma-scan-pro-build-task@1
   inputs:
     projectPath: 'WebApplication2.sln'
@@ -48,14 +23,7 @@ steps:
     outputFilename: 'PumaScanResults'
     verboseMode: true
 
-- task: SonarCloudAnalyze@1
-
-- task: SonarCloudPublish@1
-  displayName: 'Publish results on build summary'
-  inputs:
-    pollingTimeoutSec: '300'
-
-- script: |
+- powershell: |
     $text = Get-Content .\PumaScanResults.html -Raw
     Write-Host "$text"
     Write-Host "##vso[task.setvariable variable=Test;]$text"
