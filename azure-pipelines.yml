@@ -14,17 +14,18 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  Test: 'test'
 
 steps:
 - task: puma-scan-pro-build-task@1
   inputs:
     projectPath: 'WebApplication2.sln'
-    scanResultsFormat: 'html'
+    scanResultsFormat: 'sonarcloud'
     outputFilename: 'PumaScanResults'
     verboseMode: true
 
 - powershell: |
-    $text = Get-Content .\PumaScanResults.html -Raw
+    $text = Get-Content .\PumaScanResults.sonarcloud.json -Raw
     Write-Host "$text"
     Write-Host "##vso[task.setvariable variable=Test;]$text"
 
